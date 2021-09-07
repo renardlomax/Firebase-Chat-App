@@ -1,8 +1,6 @@
 (function () {
   // TODO: replace this with your own firebase config object after creating app in your firebase console
   // Your web app's Firebase configuration
-
-  // note: this config will not work indefinitely, will need to replace with your own config to run solution file
   var firebaseConfig = {
     apiKey: "AIzaSyCy3Ich_umLN5tYTuP3ARJyuZIzNretQCM",
     authDomain: "chat-app-10975.firebaseapp.com",
@@ -27,15 +25,9 @@
   const write = document.getElementById('write');
   const read = document.getElementById('read');
   const status = document.getElementById('status');
-  const date = document.getElementById('date');
-
-  // div to hold contents of messages db as a chat box between any users
+  const userNameDisplay = document.getElementById('name-display'); // element that can show the current user's email
   const chat = document.getElementById('chat-box');
-
-  // element that should show the currently logged in user's email address
-  const userNameDisplay = document.getElementById('name-display');
   let currentUserEmail = ''; // variable to store the current user's email
-  
 
   // write
   write.addEventListener('click', (e) => {
@@ -44,10 +36,10 @@
     // simple id - ok for example, do not use in production
     const id = new Date().getTime();
 
-    // write to db
+    // TODO: Add the value of currentUserEmail when writing to the database under the field name of "sender"
     messages
       .child(id)
-      .set({ message: message.value, sender: currentUserEmail , date: new Date().toLocaleString()  })
+      .set({ message: message.value })
       .then(function () {
         console.log('Wrote to DB!');
       });
@@ -60,11 +52,7 @@
 
   // TODO: use this provided messagesRef to listen for updates and update the chat div on any update, not just when the 'Update Chat' button is clicked
   const messagesRef = db.ref('messages');
-  messagesRef.on('value', (snapshot) => {
-    handleRead();
-  });
 
-  // Function triggered on click of the 'Update Chat' button which parses the contents of the messages array to show them in the chat window
   function handleRead() {
     status.innerHTML = '';
     chat.innerHTML = '';
@@ -87,10 +75,8 @@
     });
   }
 
-  function updateCurrentUser(userEmail) {
-    userNameDisplay.innerHTML = userEmail;
-    currentUserEmail = userEmail;
-  }
+  // TODO: in this function you should set the userNameDisplay.innerHTML to the passed in userEmail as well as updating the currentUserEmail variable to that same value
+  function updateCurrentUser(userEmail) {}
 
   // login
   login.addEventListener('click', (e) => {
@@ -127,8 +113,6 @@
     });
     promise.catch((e) => console.log(e.message));
   });
-  PhoneAuthProvider.provided()
-  
 
   // logout
   logout.addEventListener('click', (e) => {
@@ -137,7 +121,7 @@
       .signOut()
       .then((resp) => {
         console.log('Logout Response: ', resp);
-        logout.style. display = 'none';
+        logout.style.display = 'none';
         login.style.display = 'inline';
         signup.style.display = 'inline';
         write.style.display = 'none';
