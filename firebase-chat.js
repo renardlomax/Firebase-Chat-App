@@ -1,6 +1,6 @@
 (function () {
-  // TODO: replace this with your own firebase config object after creating app in your firebase console
-  // Your web app's Firebase configuration
+
+  //  web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyCy3Ich_umLN5tYTuP3ARJyuZIzNretQCM",
     authDomain: "chat-app-10975.firebaseapp.com",
@@ -36,7 +36,7 @@
     // simple id - ok for example, do not use in production
     const id = new Date().getTime();
 
-    // TODO: Add the value of currentUserEmail when writing to the database under the field name of "sender"
+ 
     messages
       .child(id)
       .set({ message: message.value })
@@ -50,7 +50,7 @@
     handleRead();
   });
 
-  // TODO: use this provided messagesRef to listen for updates and update the chat div on any update, not just when the 'Update Chat' button is clicked
+  //   this provided messagesRef to listen for updates and update the chat div on any update, not just when the 'Update Chat' button is clicked
   const messagesRef = db.ref('messages');
 
   function handleRead() {
@@ -75,7 +75,7 @@
     });
   }
 
-  // TODO: in this function you should set the userNameDisplay.innerHTML to the passed in userEmail as well as updating the currentUserEmail variable to that same value
+  //  this function you should set the userNameDisplay.innerHTML to the passed in userEmail as well as updating the currentUserEmail variable to that same value
   function updateCurrentUser(userEmail) {}
 
   // login
